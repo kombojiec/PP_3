@@ -1,0 +1,11 @@
+.visible_block{
+    display: block;
+}
+
+.visible_flex{
+    display: flex;
+}
+
+.invisible{
+    display: none;
+}

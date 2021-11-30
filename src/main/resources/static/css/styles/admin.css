@@ -1,0 +1,209 @@
+*, p, h1, h2{
+    margin: 0;
+    padding: 0;
+}
+
+.page{
+    background-color: #eaeaea;
+}
+
+
+/* ================ navbar ================== */
+
+.navbar{
+    margin: 0;
+    padding: 0;
+}
+.navbar__container{
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.81);
+    color: #fff;
+}
+
+.navbar__info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    vertical-align: center;
+}
+
+.navbar__email{
+    font-size: 20px;
+    padding-right: 10px;
+}
+
+.navbar__role{
+    font-size: 20px;
+    padding-left: 7px;
+}
+
+.navbar__text{
+    font-size: 20px;
+}
+
+.navbar__link{
+    color:rgb(155, 138, 138);
+    text-decoration: none;
+    margin-right: 20px;
+}
+
+
+/* ================ sidebar ================== */
+
+.sidebar{
+    width: 250px;
+    height: 100vh;
+    background-color: #fff;
+}
+
+.sidebar__list{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+    list-style: none;
+}
+
+.sidebar__item{
+    position: relative;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    height: 50px;
+}
+
+.sidebar__item.active{
+    background-color: #4c4cff;
+    color: #fff;
+}
+
+.sidebar__item.active .sidebar__link{
+    color: #fff;
+}
+
+.sidebar__item:hover{
+    text-decoration: underline;
+}
+
+.page__wrapper{
+    display: flex;
+    padding-top: 70px;
+}
+
+
+/* ================ content ================== */
+
+.content{
+    width: 100%;
+    padding: 30px 50px;
+}
+
+.content__header{
+    margin-bottom: 20px;
+}
+
+.content__description{
+    padding: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.content-table{
+    background-color: #fff;
+}
+
+/* ================ user form ================== */
+.user-form__container{
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid rgb(192, 186, 186);
+}
+
+.user-form{
+    width: 30%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user-form__label{
+    display: block;
+    text-align: center;
+    font-weight: 700;
+    margin: 0;
+}
+
+.user-form__input{
+}
+
+.user-form__button{
+    margin: auto;
+}
+
+
+/* ================ user form ================== */
+.popup{
+    position: absolute;
+    z-index: 1031;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-form__wrapper{
+    position: relative;
+    background-color: #fff;
+    /* padding: 20px; */
+    width: 40%;
+    border-radius: 5px;
+}
+
+.edit-form__description{
+    font-weight: 700;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(199, 189, 189);
+}
+
+.edit-form{
+    width: 100%;
+    padding: 10px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-form__content{
+    width: 50%;
+}
+
+.button_wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.edit-form__button{
+    margin: 5px;
+}
+
+.edit-form__close-button{
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-50%, 50%);
+}
