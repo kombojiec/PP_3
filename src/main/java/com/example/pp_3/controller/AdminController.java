@@ -32,7 +32,7 @@ public class AdminController {
     @GetMapping("")
     public String getUsers(Model model) {
         model.addAttribute("users", userService.getUsers());
-        return "admin";
+        return "index";
     }
 
     @GetMapping("/create")

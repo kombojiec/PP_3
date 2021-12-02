@@ -7,7 +7,9 @@ import java.util.Set;
 public interface UserDao {
     Set<User> getUsers();
     User getUserById(int id);
-    void deleteUser(int id);
+    User deleteUser(int id);
     User getUserByName(String name);
-    void saveUser(User user);
+    User saveUser(User user);
+
+    User getUserByEmail(String email);
 }

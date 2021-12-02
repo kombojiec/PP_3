@@ -33,26 +33,35 @@ public class UserDaoImpl implements UserDao{
     }
 
     @Override
-    public void deleteUser(int id) {
+    public User deleteUser(int id) {
         User user = em.find(User.class, id);
         user.setRoles(null);
         em.remove(user);
+        return user;
     }
 
     @Override
     public User getUserByName(String name) {
-        TypedQuery<User> query =  em.createQuery("select u from User u JOIN FETCH u.roles where  u.username = :name", User.class);
+        TypedQuery<User> query =  em.createQuery("select u from User u JOIN FETCH u.roles where  u.firstName = :name", User.class);
         query.setParameter("name", name);
         return query.getSingleResult();
     }
 
     @Override
-    public void saveUser(User user) {
+    public User getUserByEmail(String email) {
+        TypedQuery<User> query =  em.createQuery("select u from User u JOIN FETCH u.roles where  u.email = :email", User.class);
+        query.setParameter("email", email);
+        return query.getSingleResult();
+    }
+
+    @Override
+    public User saveUser(User user) {
         if(user.getId() == 0) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         } else if(user.getId() != 0 && !getUserById(user.getId()).getPassword().equals(user.getPassword())) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
-        em.merge(user);
+        return em.merge(user);
     }
+
 }

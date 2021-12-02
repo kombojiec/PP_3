@@ -1,18 +1,13 @@
 package com.example.pp_3.service;
 
 import com.example.pp_3.dao.UserDao;
-import com.example.pp_3.entity.Role;
 import com.example.pp_3.entity.User;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -36,8 +31,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void deleteUser(int id) {
-        userDao.deleteUser(id);
+    public User deleteUser(int id) {
+        return userDao.deleteUser(id);
     }
 
     @Override
@@ -48,14 +43,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void saveUser(User user) {
-        userDao.saveUser(user);
+    public User saveUser(User user) {
+        return userDao.saveUser(user);
+    }
+
+    @Override
+    @Transactional
+    public User getUserByEmail(String email) {
+        return userDao.getUserByEmail(email);
     }
 
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = getUserByName(s);
+        User user = getUserByEmail(s);
         if(user == null) {
             throw new UsernameNotFoundException(String.format("User '%s' not found", s));
         }
