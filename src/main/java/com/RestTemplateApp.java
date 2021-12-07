@@ -12,7 +12,6 @@ public class RestTemplateApp {
         ApplicationContext ctx = SpringApplication.run(RestTemplateApp.class, args);
         UserService userService = ctx.getBean(UserService.class);
 
-//        userService.setConnection();
         System.out.println(userService.getAllUsers());
         System.out.println(userService.addUser());
         System.out.println(userService.editUser());

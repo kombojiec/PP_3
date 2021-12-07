@@ -8,8 +8,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Component
@@ -57,8 +57,11 @@ public class UserServiceRest implements UserService {
         map.put("lastName", "Shelby");
         map.put("age", 15);
 
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("id","3");
+
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(map, headers);
-        ResponseEntity<String> response = restTemplate.exchange(serverUrl, HttpMethod.PUT, entity, String.class);
+        ResponseEntity<String> response = restTemplate.exchange(serverUrl, HttpMethod.PUT, entity, String.class, param);
         return response.getBody();
     }
     @Override
