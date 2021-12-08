@@ -3,7 +3,7 @@ import {createUser} from "/scripts/api.js";
 const tableContainer = document.querySelector('#tableContainer');
 const usersTable = document.querySelector('#usersTable');
 
-function createUserForm() {
+function createUserForm(isAdmin) {
     const html = document.createElement('div');
     html.setAttribute("id", "addForm");
     html.setAttribute("class", "table__container");
@@ -40,7 +40,7 @@ function createUserForm() {
     const form = html.querySelector("#user-form");
    form.addEventListener("submit", event => {
         event.preventDefault();
-        createUser(formHandler(form))
+        createUser(formHandler(form), isAdmin)
             .then(res => res.json())
             .then(res => console.log(res))
             .finally(() => {
@@ -51,9 +51,9 @@ function createUserForm() {
     return html;
 }
 
-function showUserForm() {
+function showUserForm(isAdmin) {
     tableContainer.innerHTML = '';
-    tableContainer.insertAdjacentElement('beforeend', createUserForm());
+    tableContainer.insertAdjacentElement('beforeend', createUserForm(isAdmin));
 }
 
 function formHandler(form) {

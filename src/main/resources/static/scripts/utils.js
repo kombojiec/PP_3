@@ -9,7 +9,7 @@ const editForm = document.querySelector('#edit-form');
 const deleteFormContainer = document.querySelector('#deleteForm');
 const deleteForm = document.querySelector('#delete-form');
 
-function createAdminTable() {
+function createAdminTable(isAdmin) {
     const table = document.createElement('table');
     table.setAttribute('class','table table-striped content-table');
     table.setAttribute('id', 'table');
@@ -29,7 +29,7 @@ function createAdminTable() {
                     </tbody>`)
     tableContainer.innerHTML = '';
     tableContainer.insertAdjacentElement('beforeend', table);
-    renderAdminList(getUsersList())
+    renderAdminList(getUsersList(isAdmin))
 }
 
 function createUserTable(id) {
@@ -98,6 +98,7 @@ async function renderAdminList(fetch) {
     await fetch
         .then(res => res.json())
         .then(res => {
+            console.log(res);
             res.forEach(el => {
                 tbody.insertAdjacentElement('beforeend', createAdminRow(el));
             })

@@ -1,5 +1,5 @@
 import {createUserTable, createAdminTable} from '/scripts/utils.js';
-import {getUsersList, getUserInfo, updateUser, deleteUser} from '/scripts/api.js';
+import {updateUser, deleteUser} from '/scripts/api.js';
 import {showUserForm} from "/scripts/components/newUserFormHandler.js";
 import {editFormHandler} from "/scripts/components/editFormHandler.js";
 import {deleteFormHandler} from "/scripts/components/deleteFormHandler.js";
@@ -40,7 +40,7 @@ if(!isAdmin) {
 }
 
 if(isAdmin) {
-    createAdminTable();
+    createAdminTable(isAdmin);
 }
 
 if(!isAdmin) {
@@ -52,14 +52,14 @@ newUser.addEventListener('click', event => {
     usersTable.classList.remove(active);
     contentDescription.textContent = "Add new User";
     newUser.classList.add(active);
-    showUserForm();
+    showUserForm(isAdmin);
 });
 
 usersTable.addEventListener('click', event => {
     usersTable.classList.add(active);
     contentDescription.textContent = "All users";
     newUser.classList.remove(active);
-    createAdminTable()
+    createAdminTable(isAdmin)
 })
 
 // =============== Переключение контента на сайдбаре
@@ -73,7 +73,7 @@ userRole.addEventListener('click', () => {
 })
 
 adminRole.addEventListener('click', () => {
-    createAdminTable();
+    createAdminTable(isAdmin);
     adminRole.classList.add(active);
     userRole.classList.remove(active);
     usersTable.classList.add(active);
@@ -98,7 +98,7 @@ closeCrossButtons.forEach(button => {
 // =============== Обработка формы редактирования
 editForm.addEventListener("submit", event => {
     event.preventDefault();
-    updateUser(editFormHandler(editForm))
+    updateUser(editFormHandler(editForm), isAdmin)
         .then(res => res.json())
         .then(res => console.log(res))
         .finally(() => {
@@ -111,7 +111,7 @@ editForm.addEventListener("submit", event => {
 // =============== Обработка формы удаления
 deleteForm.addEventListener('submit', event => {
     event.preventDefault();
-    deleteUser(deleteFormHandler(deleteForm))
+    deleteUser(deleteFormHandler(deleteForm), isAdmin)
     .then(res => res.json())
     .then(res => console.log(res))
         .finally(() => {

@@ -4,6 +4,9 @@ import com.example.pp_3.entity.Role;
 import com.example.pp_3.entity.User;
 import com.example.pp_3.service.RoleService;
 import com.example.pp_3.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -22,29 +25,61 @@ public class ApiRestController {
         roles = roleService.getRoles();
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/users")
-    public Set<User> getUsers() {
-        return userService.getUsers();
+        public ResponseEntity<?> getUsers(@RequestHeader("isAdmin") boolean isAdmin) {
+        ResponseEntity<?> response;
+        if(isAdmin) {
+            response = new ResponseEntity(userService.getUsers(), HttpStatus.OK);
+        } else {
+            response = new ResponseEntity("Forbidden page", HttpStatus.FORBIDDEN);
+        }
+        return response;
+
     }
 
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_USER')")
     @GetMapping("/users/{id}")
     public User getUserById(@PathVariable int id) {
         return userService.getUserById(id);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/users")
-    public User saveUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public ResponseEntity<?> saveUser(@RequestBody User user, @RequestHeader("isAdmin") boolean isAdmin) {
+        ResponseEntity<?> response;
+        if(isAdmin) {
+            response = new ResponseEntity(userService.saveUser(user), HttpStatus.OK);
+        } else {
+            response = new ResponseEntity("Forbidden page", HttpStatus.FORBIDDEN);
+        }
+        return response;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/users")
-    public User updateUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public ResponseEntity<?> updateUser(@RequestBody User user, @RequestHeader("isAdmin") boolean isAdmin) {
+        ResponseEntity<?> response;
+        if(isAdmin) {
+            response = new ResponseEntity(userService.saveUser(user), HttpStatus.OK);
+        } else {
+            response = new ResponseEntity("Forbidden page", HttpStatus.FORBIDDEN);
+        }
+        return response;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/users/{id}")
-    public User deleteUserById(@PathVariable int id) {
-        return userService.deleteUser(id);
+    public ResponseEntity<?> deleteUserById(@PathVariable int id, @RequestHeader("isAdmin") boolean isAdmin) {
+        ResponseEntity<?> response;
+        if(isAdmin) {
+            response = new ResponseEntity(userService.deleteUser(id), HttpStatus.OK);
+        } else {
+            response = new ResponseEntity("Forbidden page", HttpStatus.FORBIDDEN);
+        }
+        return response;
     }
 
 }
+
+
