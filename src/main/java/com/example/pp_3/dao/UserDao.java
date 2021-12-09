@@ -12,4 +12,6 @@ public interface UserDao {
     User saveUser(User user);
 
     User getUserByEmail(String email);
+
+    void processOAuthPostLogin(String email);
 }

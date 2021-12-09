@@ -54,6 +54,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void processOAuthPostLogin(String email) {
+        userDao.processOAuthPostLogin(email);
+    }
+
+    @Override
     @Transactional
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = getUserByEmail(s);

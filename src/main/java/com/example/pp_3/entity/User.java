@@ -43,6 +43,10 @@ public class User implements UserDetails {
     @Column(name = "email")
     private String email;
 
+    @Enumerated
+    @Column(name = "oauth_provider")
+    private AuthenticationProvider authProvider;
+
     @ManyToMany
     @JoinTable(name = "user_role",
                 joinColumns = @JoinColumn(name = "user_id"),
@@ -113,6 +117,13 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public AuthenticationProvider getAuthProvider() {
+        return authProvider;
+    }
+
+    public void setAuthProvider(AuthenticationProvider authProvider) {
+        this.authProvider = authProvider;
+    }
 
     @Override
     public String toString() {

@@ -1,5 +1,6 @@
 package com.example.pp_3.dao;
 
+import com.example.pp_3.entity.AuthenticationProvider;
 import com.example.pp_3.entity.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.security.Principal;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -62,6 +64,18 @@ public class UserDaoImpl implements UserDao{
             user.setPassword(passwordEncoder.encode(user.getPassword()));
         }
         return em.merge(user);
+    }
+
+    public void processOAuthPostLogin(String email) {
+        System.out.println("==========================  processOAuthPostLogin  =================================");
+        User user = getUserByEmail(email);
+        if(user == null) {
+            user = new User();
+            user.setEmail(email);
+            user.setAuthProvider(AuthenticationProvider.GOOGLE);
+
+            saveUser(user);
+        }
     }
 
 }

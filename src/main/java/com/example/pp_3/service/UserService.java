@@ -12,4 +12,5 @@ public interface UserService extends UserDetailsService {
     User getUserByName(String name);
     User saveUser(User user);
     User getUserByEmail(String email);
+    void processOAuthPostLogin(String email);
 }
